@@ -93,6 +93,9 @@ export default function App() {
     <View
       style={styles.container}
     >
+      <Text
+        style={styles.title}
+      >Cryptage de César</Text>
       <TextInput
         style={styles.input}
         onChangeText={setText}
@@ -100,10 +103,12 @@ export default function App() {
         placeholder='Texte'
       />
       <Button
+        style={styles.button}
         title={'Coller'}
         onPress={paste}
       />
       <SelectDropdown
+        defaultValue={key}
         data={keys}
         onSelect={setKey}
       />
@@ -111,10 +116,12 @@ export default function App() {
         style={styles.buttonContainer}
       >
         <Button
+          style={styles.button}
           title={'Crypter'}
           onPress={ceasar}
         />
         <Button
+          style={styles.button}
           title={'Hugo Décrypter'}
           onPress={unceasar}
         />
@@ -123,6 +130,7 @@ export default function App() {
         style={styles.input}
       >{result}</Text>
       <Button
+        style={styles.button}
         title={'Copier'}
         onPress={copy}
       />
@@ -134,6 +142,7 @@ const styles = StyleSheet.create({
   buttonContainer:{
     flexDirection:'row',
     justifyContent:'space-between',
+    marginBottom:20,
     width:250,
   },
   container: {
@@ -148,8 +157,12 @@ const styles = StyleSheet.create({
     width:300,
     height:50,
     fontSize:20,
-    margin:20,
+    marginTop:20,
     textAlign:'center',
     textAlignVertical:'center',
+  },
+  title:{
+    fontSize:30,
+    fontWeight:'bold',
   }
 });
