@@ -1,82 +1,82 @@
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput , View} from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 import * as Clipboard from 'expo-clipboard';
 
 export default function App() {
 
-  const [text, setText] =useState('')
+  const [text, setText] = useState('')
   const [key, setKey] = useState(1);
   const [result, setResult] = useState('')
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'
-  const keys = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,]
-  let upperCase=false;
+  const keys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,]
+  let upperCase = false;
 
   const ceasar = () => {
-    ceasaredText =''
-    for(i = 0; i < text.length; i++){
-      if(text[i] === text[i].toUpperCase()){
-        upperCase=true;
+    ceasaredText = ''
+    for (i = 0; i < text.length; i++) {
+      if (text[i] === text[i].toUpperCase()) {
+        upperCase = true;
       }
       letter = text[i].toLowerCase();
-      if(letter === ' '){
-        ceasaredText = ceasaredText+' ';
-      }else{
-        for(j = 0; j<alphabet.length; j++){
-          if(letter === alphabet[j]){
-            if(upperCase){
-              if(j <= 25-key){
-                ceasaredText = ceasaredText+alphabet[j+key].toUpperCase();
+      if (letter === ' ') {
+        ceasaredText = ceasaredText + ' ';
+      } else {
+        for (j = 0; j < alphabet.length; j++) {
+          if (letter === alphabet[j]) {
+            if (upperCase) {
+              if (j <= 25 - key) {
+                ceasaredText = ceasaredText + alphabet[j + key].toUpperCase();
               }
-              else if(j > 25-key){
-                ceasaredText = ceasaredText+alphabet[key-(26-j)].toUpperCase(); 
+              else if (j > 25 - key) {
+                ceasaredText = ceasaredText + alphabet[key - (26 - j)].toUpperCase();
               }
-            }else{
-              if(j <= 25-key){
-                ceasaredText = ceasaredText+alphabet[j+key];
+            } else {
+              if (j <= 25 - key) {
+                ceasaredText = ceasaredText + alphabet[j + key];
               }
-              else if(j > 25-key){
-                ceasaredText = ceasaredText+alphabet[key-(26-j)]; 
+              else if (j > 25 - key) {
+                ceasaredText = ceasaredText + alphabet[key - (26 - j)];
               }
             }
           }
         }
       }
-      upperCase=false;
+      upperCase = false;
     }
     setResult(ceasaredText)
   }
   const unceasar = () => {
-    unceasaredText =''
-    for(i = 0; i < text.length; i++){
-      if(text[i] === text[i].toUpperCase()){
-        upperCase=true;
+    unceasaredText = ''
+    for (i = 0; i < text.length; i++) {
+      if (text[i] === text[i].toUpperCase()) {
+        upperCase = true;
       }
       letter = text[i].toLowerCase();
-      if(letter === ' '){
-        unceasaredText = unceasaredText+' ';
-      }else{
-        for(j = 0; j<alphabet.length; j++){
-          if(letter === alphabet[j]){
-            if(upperCase){
-              if(j >= 0+key){
-                unceasaredText = unceasaredText+alphabet[j-key].toUpperCase();
+      if (letter === ' ') {
+        unceasaredText = unceasaredText + ' ';
+      } else {
+        for (j = 0; j < alphabet.length; j++) {
+          if (letter === alphabet[j]) {
+            if (upperCase) {
+              if (j >= 0 + key) {
+                unceasaredText = unceasaredText + alphabet[j - key].toUpperCase();
               }
-              else if(j < 0+key){
-                unceasaredText = unceasaredText+alphabet[(26+j)-key].toUpperCase(); 
+              else if (j < 0 + key) {
+                unceasaredText = unceasaredText + alphabet[(26 + j) - key].toUpperCase();
               }
-            }else{
-              if(j >= 0+key){
-                unceasaredText = unceasaredText+alphabet[j-key];
+            } else {
+              if (j >= 0 + key) {
+                unceasaredText = unceasaredText + alphabet[j - key];
               }
-              else if(j < 0+key){
-                unceasaredText = unceasaredText+alphabet[(26+j)-key];
+              else if (j < 0 + key) {
+                unceasaredText = unceasaredText + alphabet[(26 + j) - key];
               }
             }
           }
         }
       }
-      upperCase=false;
+      upperCase = false;
     }
     setResult(unceasaredText)
   }
@@ -108,6 +108,7 @@ export default function App() {
         onPress={paste}
       />
       <SelectDropdown
+        style={styles.select}
         defaultValue={key}
         data={keys}
         onSelect={setKey}
@@ -139,11 +140,11 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  buttonContainer:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    marginBottom:20,
-    width:250,
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+    width: 250,
   },
   container: {
     flex: 1,
@@ -151,18 +152,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  input:{
-    borderWidth:1,
-    borderColor:'black',
-    width:300,
-    height:50,
-    fontSize:20,
-    marginTop:20,
-    textAlign:'center',
-    textAlignVertical:'center',
+  input: {
+    borderWidth: 1,
+    borderColor: 'black',
+    width: 300,
+    height: 50,
+    fontSize: 20,
+    marginTop: 20,
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
-  title:{
-    fontSize:30,
-    fontWeight:'bold',
+  select: {
+    margin: 10,
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
   }
 });
